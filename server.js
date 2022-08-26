@@ -70,4 +70,18 @@ app.get("/eatHub", (req, res) => {
   });
 });
 
+//  NEW ROUTE
+
+app.get("/eatHub/new", (req, res) => {
+  MenuItem.find({}, (err, menu) => {
+    if (err) {
+      console.log("error", err);
+    } else {
+      res.render("new.ejs", { menu });
+    }
+  });
+});
+
+// CREATE ROUTE
+
 app.listen(port, () => console.log(`proj 2 on http://localhost:${port}`));
