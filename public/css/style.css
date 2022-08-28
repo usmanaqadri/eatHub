@@ -1,0 +1,39 @@
+#order-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-row-end: 2;
+    row-gap: 2em;
+    width: 75%;
+    justify-items: start;
+    align-items: stretch;
+}
+
+label {
+    cursor: pointer;
+    border: 1px solid black;
+    margin-right:80px;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 50px;
+}
+
+#item-header {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type=checkbox] {
+    
+}
+
+input[type=checkbox]:checked + .item {
+    background-color: black;
+    color: white;
+}

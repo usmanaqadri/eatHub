@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const MenuItem = require("./models/menuItems");
+const CartItem = require("./models/cart");
 const app = express();
 const port = process.env.PORT || 3000;
 const methodOverride = require("method-override");
@@ -65,7 +66,13 @@ app.get("/eatHub", (req, res) => {
     if (err) {
       console.log("error", err);
     } else {
-      res.render("index.ejs", { items });
+      CartItem.find({}, (err, cart) => {
+        if (err) {
+          console.log("error", err);
+        } else {
+          res.render("index.ejs", { items, cart });
+        }
+      });
     }
   });
 });
@@ -83,5 +90,20 @@ app.get("/eatHub/new", (req, res) => {
 });
 
 // CREATE ROUTE
+app.post("/eatHub", ({ body }, res) => {
+  const { name } = body;
+  console.log(name);
+  const newCartItems = [];
+  for (const eachName of name) {
+    newCartItems.push({ name: eachName, price: 10, qty: 1 });
+  }
+  CartItem.create(newCartItems, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/eatHub");
+    }
+  });
+});
 
 app.listen(port, () => console.log(`proj 2 on http://localhost:${port}`));

@@ -5,8 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Which items you wanna order?</h1>
+    <form action="/eatHub" method="POST">
+        <div id="order-up">
+            <% for( const item of menu ) { %>
+                <label>
+                    <img width="50px" src="<%= item.imgUrl %> " />
+                    <div id="item">
+                        <div id="item-header">
+                            <h3><%= item.name %></h3><input type="checkbox" id="<%= item.name %>" value="<%= item.name%>" name='name'/>
+                            <h3>$<%= item.price %> </h3>
+                        </div>
+                        <p><%= item.desc %> </p>
+                    </div>
+                </label>
+                <% } %>
+        </div>
+        <button>Add to Cart!</button>
+    </form>
 </body>
 </html>
