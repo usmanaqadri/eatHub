@@ -7,30 +7,43 @@
     <title>Document</title>
     <style>
         body {
+            background-color: black;
+            color: white;
+        }
+        section {
             display: flex;
             justify-content: space-around;
+        }
+        a {
+            color: rgb(201, 201, 252);
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Menu</h1>
-        <% for( const item of items ) { %>
-            <a href="/eatHub/<%= item.id %>"><h1><%= item.name %> </h1></a>
-        <% } %>
-        <a href="/eatHub/order"><h3>Create a new order</h3></a>
-    </div>
-    <div>
-        <h1>Cart</h1>
-        <% for( const cartItem of cart ) { %>
-            <h1><%= cartItem.name %></h1><span>$<%= cartItem.price %>.00</span> <p>Quantity: <%= cartItem.qty %></p><a href="/eatHub/order/<%= cartItem.id %>/edit">Edit</a>
-            <form method="post" action="/eatHub/order/<%= cartItem.id %>?_method=DELETE">
-                <button>Delete</button>
+    <header>
+        <h1>EatHub</h1>
+    </header>
+    <section>
+        <div>
+            <h1>Menu</h1>
+            <% for( const item of items ) { %>
+                <a href="/eatHub/<%= item.id %>"><h1><%= item.name %> </h1></a>
+            <% } %>
+            <a href="/eatHub/order"><h3>Create a new order</h3></a>
+        </div>
+        <div>
+            <h1>Cart</h1>
+            <% for( const cartItem of cart ) { %>
+                <h1><%= cartItem.name %></h1><span>$<%= cartItem.price %>.00</span> <p>Quantity: <%= cartItem.qty %></p><a href="/eatHub/order/<%= cartItem.id %>/edit">Edit</a>
+                <form method="post" action="/eatHub/order/<%= cartItem.id %>?_method=DELETE">
+                    <button>Delete</button>
+                </form>
+            <% } %>
+            <form method="post" action="/eatHub/?_method=DELETE">
+                <button>Empty Cart</button>
             </form>
-        <% } %>
-        <form method="post" action="/eatHub/?_method=DELETE">
-            <button>Empty Cart</button>
-        </form>
-    </div>
+        </div>
+    </section>
 </body>
 </html>

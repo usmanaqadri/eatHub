@@ -13,9 +13,18 @@
     <h2><%= item.rating %> stars out of 5</h2> 
     <h2>$<%= item.price %>.00</h2>
     <form action="/eatHub" method="POST">
-        Add to cart? <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order'/>
-        <button>Submit</button>
+        Add to cart? <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order' onclick="addToCart()"/>
+        <button>Return to menu</button>
     </form>
-
+    <script>
+        const checkboxEl = document.querySelector("input")
+        const addToCart = () => {
+            if (checkboxEl.checked) {
+                document.querySelector("button").textContent = "Add to Cart"
+            } else {
+                document.querySelector("button").textContent = "Return to menu "
+            }
+        }
+    </script>
 </body>
 </html>
