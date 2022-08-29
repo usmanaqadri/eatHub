@@ -5,12 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
-    HEre is the index!
     <div>
+        <h1>Menu</h1>
         <% for( const item of items ) { %>
             <h1><%= item.name %> </h1>
+        <% } %>
+    </div>
+    <div>
+        <h1>Cart</h1>
+        <% for( const cartItem of cart ) { %>
+            <h1><%= cartItem.name %></h1><span>$<%= cartItem.price %>.00</span> <p>Quantity: <%= cartItem.qty %></p><a href="/eatHub/order/<%= cartItem.id %>/edit">Edit</a>
         <% } %>
     </div>
 </body>

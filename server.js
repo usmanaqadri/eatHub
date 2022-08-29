@@ -79,22 +79,19 @@ app.get("/eatHub", (req, res) => {
 
 //  NEW ROUTE
 
-app.get("/eatHub/new", (req, res) => {
+app.get("/eatHub/order", (req, res) => {
   MenuItem.find({}, (err, menu) => {
     if (err) {
       console.log("error", err);
     } else {
-      res.render("new.ejs", { menu });
+      res.render("order.ejs", { menu });
     }
   });
 });
 
 // CREATE ROUTE
 app.post("/eatHub", async ({ body }, res) => {
-  console.log(body);
   let { order } = body;
-  console.log("this is the order", order);
-  console.log("this is the typeof", typeof order);
   if (typeof order === "string") {
     order = [order];
   }
@@ -114,6 +111,34 @@ app.post("/eatHub", async ({ body }, res) => {
       res.redirect("/eatHub");
     }
   });
+});
+
+// EDIT ROUTE
+app.get("/eatHub/order/:id/edit", (req, res) => {
+  CartItem.findById(req.params.id, (err, item) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("edit.ejs", { item });
+    }
+  });
+});
+
+// UPDATE ROUTE
+app.put("/eatHub", (req, res) => {
+  const update = Object.entries(req.body)[0];
+  CartItem.findByIdAndUpdate(
+    update[0],
+    { qty: update[1] },
+    { new: true },
+    (err, updatedItem) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/eatHub");
+      }
+    }
+  );
 });
 
 app.listen(port, () => console.log(`proj 2 on http://localhost:${port}`));
