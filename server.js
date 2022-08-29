@@ -28,26 +28,26 @@ app.get("/", (req, res) => {
 app.get("/seed", async (req, res) => {
   const newProducts = [
     {
-      order: "Beans",
+      name: "Beans",
       desc: "A small pile of beans. Buy more beans for a big pile of beans.",
       imgUrl:
         "https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2",
       price: 5,
-      qty: 99,
+      rating: 5,
     },
     {
-      order: "Bones",
+      name: "Bones",
       desc: "It's just a bag of bones.",
       imgUrl: "http://bluelips.com/prod_images_large/bones1.jpg",
       price: 25,
-      qty: 0,
+      rating: 5,
     },
     {
-      order: "Bins",
+      name: "Bins",
       desc: "A stack of colorful bins for your beans and bones.",
       imgUrl: "http://www.clipartbest.com/cliparts/9cz/rMM/9czrMMBcE.jpeg",
       price: 7000,
-      qty: 1,
+      rating: 5,
     },
   ];
 
@@ -77,6 +77,18 @@ app.get("/eatHub", (req, res) => {
   });
 });
 
+// SHOW ROUTE
+
+app.get("/eatHub/:id", (req, res) => {
+  MenuItem.findById(req.params.id, (err, item) => {
+    if (err) {
+      console.log("error", err);
+    } else {
+      res.render("show.ejs", { item });
+    }
+  });
+});
+
 //  NEW ROUTE
 
 app.get("/eatHub/order", (req, res) => {
@@ -90,8 +102,11 @@ app.get("/eatHub/order", (req, res) => {
 });
 
 // CREATE ROUTE
-app.post("/eatHub", async ({ body }, res) => {
+app.post("/eatHub", ({ body }, res) => {
   let { order } = body;
+  if (!order) {
+    res.redirect("/eatHub");
+  }
   if (typeof order === "string") {
     order = [order];
   }

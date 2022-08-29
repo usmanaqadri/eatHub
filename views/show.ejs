@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%= item.name %> </h1>
+    <h2><%= item.desc %> </h2>
+    <img width="100px" src="<%= item.imgUrl %>"/>
+    <h2><%= item.rating %> stars out of 5</h2> 
+    <h2>$<%= item.price %>.00</h2>
+    <form action="/eatHub" method="POST">
+        Add to cart? <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order'/>
+        <button>Submit</button>
+    </form>
+
+</body>
+</html>
