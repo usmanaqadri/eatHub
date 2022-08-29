@@ -77,17 +77,7 @@ app.get("/eatHub", (req, res) => {
   });
 });
 
-// SHOW ROUTE
-
-app.get("/eatHub/:id", (req, res) => {
-  MenuItem.findById(req.params.id, (err, item) => {
-    if (err) {
-      console.log("error", err);
-    } else {
-      res.render("show.ejs", { item });
-    }
-  });
-});
+app.get("eatHub/order");
 
 //  NEW ROUTE
 
@@ -97,6 +87,18 @@ app.get("/eatHub/order", (req, res) => {
       console.log("error", err);
     } else {
       res.render("order.ejs", { menu });
+    }
+  });
+});
+
+// SHOW ROUTE
+
+app.get("/eatHub/:id", (req, res) => {
+  MenuItem.findById(req.params.id, (err, item) => {
+    if (err) {
+      console.log("error", err);
+    } else {
+      res.render("show.ejs", { item });
     }
   });
 });
@@ -156,7 +158,17 @@ app.put("/eatHub", (req, res) => {
   );
 });
 
-// DESTROY ROUTE
+// DESTROY ROUTES
+
+app.delete("/eatHub", (req, res) => {
+  CartItem.deleteMany({}, (err, cart) => {
+    if (err) {
+      console.log("error", err);
+    } else {
+      res.redirect("/eatHub");
+    }
+  });
+});
 
 app.delete("/eatHub/order/:id", (req, res) => {
   CartItem.findByIdAndRemove(req.params.id, (err, deletedItem) => {
