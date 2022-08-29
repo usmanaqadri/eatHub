@@ -23,6 +23,9 @@
         <h1>Cart</h1>
         <% for( const cartItem of cart ) { %>
             <h1><%= cartItem.name %></h1><span>$<%= cartItem.price %>.00</span> <p>Quantity: <%= cartItem.qty %></p><a href="/eatHub/order/<%= cartItem.id %>/edit">Edit</a>
+            <form method="post" action="/eatHub/order/<%= cartItem.id %>?_method=DELETE">
+                <button>Delete</button>
+            </form>
         <% } %>
     </div>
 </body>

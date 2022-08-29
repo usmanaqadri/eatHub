@@ -141,4 +141,16 @@ app.put("/eatHub", (req, res) => {
   );
 });
 
+// DESTROY ROUTE
+
+app.delete("/eatHub/order/:id", (req, res) => {
+  CartItem.findByIdAndRemove(req.params.id, (err, deletedItem) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/eatHub");
+    }
+  });
+});
+
 app.listen(port, () => console.log(`proj 2 on http://localhost:${port}`));
