@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 app.get("/seed", async (req, res) => {
   const newProducts = [
     {
-      name: "Beans",
+      order: "Beans",
       desc: "A small pile of beans. Buy more beans for a big pile of beans.",
       imgUrl:
         "https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2",
@@ -36,14 +36,14 @@ app.get("/seed", async (req, res) => {
       qty: 99,
     },
     {
-      name: "Bones",
+      order: "Bones",
       desc: "It's just a bag of bones.",
       imgUrl: "http://bluelips.com/prod_images_large/bones1.jpg",
       price: 25,
       qty: 0,
     },
     {
-      name: "Bins",
+      order: "Bins",
       desc: "A stack of colorful bins for your beans and bones.",
       imgUrl: "http://www.clipartbest.com/cliparts/9cz/rMM/9czrMMBcE.jpeg",
       price: 7000,
@@ -90,16 +90,26 @@ app.get("/eatHub/new", (req, res) => {
 });
 
 // CREATE ROUTE
-app.post("/eatHub", ({ body }, res) => {
-  const { name } = body;
-  console.log(name);
+app.post("/eatHub", async ({ body }, res) => {
+  console.log(body);
+  let { order } = body;
+  console.log("this is the order", order);
+  console.log("this is the typeof", typeof order);
+  if (typeof order === "string") {
+    order = [order];
+  }
   const newCartItems = [];
-  for (const eachName of name) {
-    newCartItems.push({ name: eachName, price: 10, qty: 1 });
+  for (let eachItem of order) {
+    const item = { name: "", price: null, qty: null };
+    eachItem = eachItem.split(";");
+    item.name = eachItem[0];
+    item.price = Number(eachItem[1]);
+    item.qty = 1;
+    newCartItems.push(item);
   }
   CartItem.create(newCartItems, (err, data) => {
     if (err) {
-      console.log(err);
+      console.log("error", err);
     } else {
       res.redirect("/eatHub");
     }
