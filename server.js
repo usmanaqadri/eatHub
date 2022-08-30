@@ -105,29 +105,30 @@ app.get("/eatHub/:id", (req, res) => {
 
 // CREATE ROUTE
 app.post("/eatHub", ({ body }, res) => {
-  let { order } = body;
-  if (!order) {
+  if (Object.keys(body).length === 0) {
     res.redirect("/eatHub");
-  }
-  if (typeof order === "string") {
-    order = [order];
-  }
-  const newCartItems = [];
-  for (let eachItem of order) {
-    const item = { name: "", price: null, qty: null };
-    eachItem = eachItem.split(";");
-    item.name = eachItem[0];
-    item.price = Number(eachItem[1]);
-    item.qty = 1;
-    newCartItems.push(item);
-  }
-  CartItem.create(newCartItems, (err, data) => {
-    if (err) {
-      console.log("error", err);
-    } else {
-      res.redirect("/eatHub");
+  } else {
+    let { order } = body;
+    if (typeof order === "string") {
+      order = [order];
     }
-  });
+    const newCartItems = [];
+    for (let eachItem of order) {
+      const item = { name: "", price: null, qty: null };
+      eachItem = eachItem.split(";");
+      item.name = eachItem[0];
+      item.price = Number(eachItem[1]);
+      item.qty = 1;
+      newCartItems.push(item);
+    }
+    CartItem.create(newCartItems, (err, data) => {
+      if (err) {
+        console.log("error", err);
+      } else {
+        res.redirect("/eatHub");
+      }
+    });
+  }
 });
 
 // EDIT ROUTE
