@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Which items you wanna order?</h1>
+    <header>
+        <h1>EatHub</h1>
+    </header>
+    <h2 style="text-align: center;">Which items you wanna order?</h2>
     <form action="/eatHub" method="POST">
         <div id="order-up">
             <% for( const item of menu ) { %>
@@ -25,7 +28,21 @@
                 </label>
                 <% } %>
         </div>
-        <button>Add to Cart!</button>
+        <button>Return to Home</button>
     </form>
+    <script>
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach(input => {
+            input.addEventListener("click", myFunc)
+        })
+        function myFunc() {
+            const inputsArr = Array.from(document.querySelectorAll("input"));
+            if (inputsArr.filter(input => input.checked).length > 0) {
+                document.querySelector("button").textContent = "Add to Cart!"
+            } else {
+                document.querySelector("button").textContent = "Return to Home"
+            }
+        }
+    </script>
 </body>
 </html>
