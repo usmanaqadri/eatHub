@@ -12,11 +12,12 @@
     <form action="/eatHub" method="POST">
         <div id="order-up">
             <% for( const item of menu ) { %>
-                <label>
-                    <img width="50px" src="<%= item.imgUrl %> " />
+                <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order'/>
+                <label for="<%= item.name %>">
+                    <img width="100px" height="100px" src="<%= item.imgUrl %> " />
                     <div id="item">
                         <div id="item-header">
-                            <h3><%= item.name %></h3><input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order'/>
+                            <h3><%= item.name %></h3>
                             <h3>$<%= item.price %> </h3>
                         </div>
                         <p><%= item.desc %> </p>
