@@ -8,8 +8,7 @@ const methodOverride = require("method-override");
 
 // SETUP MONGOOSE
 const mongoose = require("mongoose");
-const MONGODB_URI =
-  "mongodb+srv://usmanaqadri:shuraim@restaurant.44woy1y.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = process.env.MONGODB_URI;
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -121,6 +120,11 @@ app.get("/eatHub", (req, res) => {
       });
     }
   });
+});
+
+// SUBMIT ROUTE
+app.get("/eatHub/submit", (req, res) => {
+  res.render("submit.ejs");
 });
 
 //  NEW ROUTE

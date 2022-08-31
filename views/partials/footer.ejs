@@ -24,9 +24,18 @@
                 <% } %> 
             </article>
             </div>
-                <form method="post" action="/eatHub/?_method=DELETE">
-                    <button class="secondary">Empty Cart</button>
-                </form>
+            <% let sumTotal = 0 %>
+            <% for (const cartItem of cart) { %> 
+                <% sumTotal += (cartItem.qty * cartItem.price) %> 
+                <% } %> 
+            <p style="margin-right: 120px;">Total: $<%= sumTotal%>.00</p>
+            </div>
+            <div style="display: flex; margin-right: 40px;">
+                <a href="/eatHub/submit"><button class="primary" style="background-color: green;">Submit Order</button></a>
+                    <form method="post" action="/eatHub/?_method=DELETE">
+                        <button class="secondary">Empty Cart</button>
+                    </form>
+            </div>
                 <% } %> 
         </div>
   </div>
