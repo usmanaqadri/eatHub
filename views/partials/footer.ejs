@@ -1,0 +1,33 @@
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div id="cart-wrapper">
+        <div id="cart">
+            <header>
+                <h2>Cart</h2>
+                <% if (cart.length === 0) { %>
+                    <p>No items</p>
+                <% } else { %> 
+            </header>
+            <article>
+                <% for( const cartItem of cart ) { %>
+                        <header>
+                            <h3 id="cart-item-header"><%= cartItem.name %></h3>
+                            <span>Qty: <%= cartItem.qty %></span>
+                        </header>
+                        <p>$<%= cartItem.qty * cartItem.price %>.00</p>
+                        <div id="cart-item-footer">
+                            <a href="/eatHub/order/<%= cartItem.id %>/edit"><button class="primary">Edit</button></a>
+                            <form method="post" action="/eatHub/order/<%= cartItem.id %>?_method=DELETE">
+                                <button class="secondary">Delete</button>
+                            </form>
+                        </div>
+                <% } %> 
+            </article>
+            </div>
+                <form method="post" action="/eatHub/?_method=DELETE">
+                    <button class="secondary">Empty Cart</button>
+                </form>
+                <% } %> 
+        </div>
+  </div>
+  

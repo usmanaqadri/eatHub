@@ -1,255 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            box-sizing: border-box;
-            background-color: black;
-            color: white;
-        }
-        header {
-            display: flex;
-            align-items: baseline;
-        }
-        nav {
-            display: flex;
-            width: 100%;
-            justify-content: space-evenly;
-        }
-        #overlay-text {
-            position: absolute;
-            top: 30vh;
-            left: 27vw;
-            text-align: center;
-            text-transform: uppercase;
-            line-height: 1.5;
-            font-size: 3em;
-            font-weight: 400;
-        }
-        .slideshow-container {
-            display: flex;
-            justify-content: center;
-            opacity: 0.7;
-        }
-        .mySlides {
-            display: none;
-        }
-        .fade {
-            animation-name: fade;
-            animation-duration: 3.5s;
-        }
-        @keyframes fade {
-            from {opacity: .7}
-            to {opacity: 1}
-        }
-        .sidenav {
-            height: 100%; /* 100% Full-height */
-            width: 0; /* 0 width - change this with JavaScript */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Stay on top */
-            top: 0; /* Stay at the top */
-            right: 0;
-            background-color: #111; /* Black*/
-            overflow-x: hidden; /* Disable horizontal scroll */
-            padding-top: 60px; /* Place content 60px from the top */
-            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */    
-        }
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-            }
-        /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
-            color: #f1f1f1;
-            }
-
-        /* Position and style the close button (top right corner) */
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-            }
-        #menu-items{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0 auto;
-            width: 70vw;
-        }
-        #menu-items > * {
-            margin: 0 100px;
-        }
-        section {
-            text-align: center;
-        }
-        a {
-            color: rgb(201, 201, 252);
-            text-decoration: none;
-            cursor: pointer;
-        }
-        #cart-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #cart {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-height: 80vh;
-            border: 1px solid white;
-            border-radius: 5px;
-            padding: 0 10px;
-        }
-        main {
-            overflow: scroll;
-        }
-        #cart-item-footer {
-            display: flex;
-            align-items: center;
-            margin: 0 auto;
-        }
-        button {
-            margin: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .primary {
-            background-color: rgb(142, 142, 255);
-            color: white;
-        }
-        .secondary {
-            background-color: rgb(254, 120, 120);
-            color: white;
-        }
-        button:hover {
-            cursor: pointer;
-            filter: brightness(125%);
-        }
-        .section-headings {
-            font-size: 30px;
-        }
-        #about-us {
-            width: 70vw;
-            margin: 0 auto;
-            line-height: 2;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1 style= "margin-right: 10vw;">EatHub</h1>
-        <nav>
-            <a href="/eatHub">Home</a>
-            <a href="#menu">Menu</a>
-            <a onclick="openNav()">Cart</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+    <%- include('./partials/header.ejs') %>
     <div class="slideshow-container">
         
         <div class="mySlides fade">
-            <img src="/assets/img1.jpg" style="width:100vw; height: 75vh;">
+            <img src="/assets/img1.jpg">
         </div>
         
         <div class="mySlides fade">
-            <img src="/assets/img2.jpg" style="width:100vw; height: 75vh;">
+            <img src="/assets/img2.jpg">
         </div>
         
         <div class="mySlides fade">
-            <img src="/assets/img3.jpg" style="width:100vw; height: 75vh;">
+            <img src="/assets/img3.jpg">
         </div>
     </div>
     <h1 id="overlay-text">Save time, order online!<br>Mon-Sun: 11:00 AM to 9:00 PM<br>Last online order: 8:45 PM</h1>
     
     <section id="menu">
-        <div>
             <h2 class="section-headings">Menu</h2>
             <div id="menu-items">
             <% for( const item of items ) { %>
                 <a href="/eatHub/<%= item.id %>"><h3 style="font-size: 25px;"><%= item.name %></h3></a>
                 <% } %>
             </div>
-                <a href="/eatHub/order"><button class="primary">Create a new order</button></a>
-        </div>
+                <a href="/eatHub/order"><button class="primary" style="padding: 20px; font-size: 20px;">Create a new order</button></a>
     </section>
     <section id="about">
         <h2 class="section-headings">About</h2>
         <p id="about-us">EatHub has been serving the GitHub community with the best food in the whole world. At EatHub, every dish is created using only the freshest and the finest ingredients. All of our edibles are topped with only the freshest toppings. <br> <br>
         Eat our food! Find out why our customers rave about us. We have been a part of the Github community since 1812. We use only the best ingredients, it must be fresh in order to be used in our dishes.</p>
     </section>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div id="cart-wrapper">
-                <div id="cart">
-                    <header style="border-bottom: 1px solid white; display: flex; align-items: center; justify-content: center; width:100%; margin: 0 auto;">
-                        <h2 style="text-align: center; margin-right: 10px;">Cart</h2>
-                        <% if (cart.length === 0) { %>
-                            <p>No items</p>
-                        <% } else { %> 
-                    </header>
-                    <main>
-                        <% for( const cartItem of cart ) { %>
-                                <header style="justify-content: space-between;">
-                                    <h3 style="padding-top: 10px; margin-top: 0;"><%= cartItem.name %></h3>
-                                    <span>Qty: <%= cartItem.qty %></span>
-                                </header>
-                                <p>$<%= cartItem.qty * cartItem.price %>.00</p>
-                                
-                                <div id="cart-item-footer">
-                                    <a style="padding: 8px;" href="/eatHub/order/<%= cartItem.id %>/edit"><button class="primary">Edit</button></a>
-                                    <form method="post" action="/eatHub/order/<%= cartItem.id %>?_method=DELETE">
-                                        <button class="secondary">Delete</button>
-                                    </form>
-                                </div>
-                        <% } %> 
-                    </main>
-                    </div>
-                        <form method="post" action="/eatHub/?_method=DELETE">
-                            <button class="secondary">Empty Cart</button>
-                        </form>
-                        <% } %> 
-                </div>
-          </div>
-    <script>
-    
-        let slideIndex = 0;
-        showSlides();
-        
-        function showSlides() {
-          let i;
-          let slides = document.getElementsByClassName("mySlides");
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-          }
-          slideIndex++;
-          if (slideIndex > slides.length) {slideIndex = 1}
-          slides[slideIndex-1].style.display = "block";
-          setTimeout(showSlides, 2000); // Change image every 2 seconds
-        }
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            }
-        </script>
+    <%- include('./partials/footer.ejs') %>
+    <script src="/js/script.js"></script>
 </body>
 </html>

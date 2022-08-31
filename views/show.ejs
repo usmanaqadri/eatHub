@@ -1,85 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-        main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        #item-stats {
-            display: flex;
-            justify-content: space-between;
-        }
-        #item-stats > * {
-            margin: 15px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        button {
-            margin-top: 10px;
-            padding: 20px;
-            cursor: pointer;
-        }
-        label {
-            background-color: rgb(102, 102, 247);
-            color: white;
-            padding: 10px 30px;
-            text-align: center;
-            cursor: pointer;
-            
-        }
-        input[type=checkbox] {
-            display: none;
-        }
-        input[type=checkbox]:checked + label {
-            background-color: rgb(181, 181, 251);
-            color: white;
-        }
-        .selected {
-            background-color: rgb(56, 168, 56);
-            border: none;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>EatHub</h1>
-    </header>
+<%- include('./partials/header.ejs') %>
     <main>
         <h2><%= item.name %></h2>
-        <h3><%= item.desc %></h3>
-        <img width="100px" src="<%= item.imgUrl %>"/>
+        <h3 id="item-desc"><%= item.desc %></h3>
+        <img id="item-img" src="<%= item.imgUrl %>"/>
         <div id="item-stats">
-            <h3><%= item.rating %> out of 5</h3> 
+            <h3><%= item.rating %> out of 5 stars</h3> 
             <h3>$<%= item.price %>.00</h3>
         </div>
         <form action="/eatHub" method="POST">
-            <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order' onclick="addToCart()"/>
-            <label for="<%= item.name %>">Add to Cart?</label>
-            <button>Return to menu</button>
+            <input class="add-label" type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order' onclick="addToCart()"/>
+            <label id="item-label" for="<%= item.name %>">Add to Cart?</label>
+            <button id="return-btn">Return to menu</button>
         </form>
     </main>
     <script>
-        const checkboxEl = document.querySelector("input")
+        const checkboxEl = document.querySelector(".add-label")
         const addToCart = () => {
-            document.querySelector("button").classList.toggle("selected")
+            document.querySelector("#return-btn").classList.toggle("selected")
             if (checkboxEl.checked) {
-                document.querySelector("button").textContent = "Add to Cart"
+                checkboxEl.nextElementSibling.textContent = "Deselect"
+                document.querySelector("button").innerHTML = "Adding to cart <br> Confirm ✓"
             } else {
+                checkboxEl.nextElementSibling.textContent = "Add to Cart?"
                 document.querySelector("button").textContent = "Return to menu "
             }
         }

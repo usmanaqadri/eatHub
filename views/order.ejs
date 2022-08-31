@@ -1,23 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <header>
-        <h1>EatHub</h1>
-    </header>
+<%- include('./partials/header.ejs') %>
     <h2 style="text-align: center;">Which items you wanna order?</h2>
     <form action="/eatHub" method="POST">
         <div id="order-up">
             <% for( const item of menu ) { %>
                 <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order'/>
-                <label for="<%= item.name %>">
-                    <img width="100px" height="100px" src="<%= item.imgUrl %> " />
+                <label class="myLabel" for="<%= item.name %>">
+                    <img style="margin-right: 20px;" width="100px" height="100px" src="<%= item.imgUrl %> " />
                     <div id="item">
                         <div id="item-header">
                             <h3><%= item.name %></h3>
@@ -28,21 +16,24 @@
                 </label>
                 <% } %>
         </div>
-        <button>Return to Home</button>
+        <button class="primary" id="add-btn">Return to Home</button>
     </form>
+    <%- include('./partials/footer.ejs') %>
     <script>
         const inputs = document.querySelectorAll("input");
-        inputs.forEach(input => {
-            input.addEventListener("click", myFunc)
-        })
+        inputs.forEach((input) => {
+        input.addEventListener("click", myFunc);
+        });
+
         function myFunc() {
-            const inputsArr = Array.from(document.querySelectorAll("input"));
-            if (inputsArr.filter(input => input.checked).length > 0) {
-                document.querySelector("button").textContent = "Add to Cart!"
-            } else {
-                document.querySelector("button").textContent = "Return to Home"
-            }
+        const inputsArr = Array.from(document.querySelectorAll("input"));
+        if (inputsArr.filter((input) => input.checked).length > 0) {
+            document.querySelector("button").textContent = "Add to Cart!";
+        } else {
+            document.querySelector("button").textContent = "Return to Home";
         }
+        }
+
     </script>
 </body>
 </html>
