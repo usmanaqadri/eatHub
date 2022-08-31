@@ -30,7 +30,28 @@
         }
         button {
             margin-top: 10px;
+            padding: 20px;
+            cursor: pointer;
+        }
+        label {
+            background-color: rgb(102, 102, 247);
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            cursor: pointer;
             
+        }
+        input[type=checkbox] {
+            display: none;
+        }
+        input[type=checkbox]:checked + label {
+            background-color: rgb(181, 181, 251);
+            color: white;
+        }
+        .selected {
+            background-color: rgb(56, 168, 56);
+            border: none;
+            color: white;
         }
     </style>
 </head>
@@ -47,13 +68,15 @@
             <h3>$<%= item.price %>.00</h3>
         </div>
         <form action="/eatHub" method="POST">
-            <label>Add to cart? <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order' onclick="addToCart()"/> </label>
+            <input type="checkbox" id="<%= item.name %>" value="<%= item.name%>; <%= item.price %>" name='order' onclick="addToCart()"/>
+            <label for="<%= item.name %>">Add to Cart?</label>
             <button>Return to menu</button>
         </form>
     </main>
     <script>
         const checkboxEl = document.querySelector("input")
         const addToCart = () => {
+            document.querySelector("button").classList.toggle("selected")
             if (checkboxEl.checked) {
                 document.querySelector("button").textContent = "Add to Cart"
             } else {
