@@ -51,7 +51,13 @@ router.get("/:id", (req, res) => {
     if (err) {
       console.log("error", err);
     } else {
-      res.render("show.ejs", { item });
+      CartItem.find({}, (err, cart) => {
+        if (err) {
+          console.log("error", err);
+        } else {
+          res.render("show.ejs", { item, cart });
+        }
+      });
     }
   });
 });
@@ -90,7 +96,19 @@ router.get("/order/:id/edit", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("edit.ejs", { item });
+      CartItem.find({}, (err, cart) => {
+        if (err) {
+          console.log("error", err);
+        } else {
+          MenuItem.find({}, (err, menu) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.render("edit.ejs", { item, menu, cart });
+            }
+          });
+        }
+      });
     }
   });
 });

@@ -260,7 +260,7 @@ input[type=checkbox]:checked + .myLabel {
 }
 
 #item-img {
-    height:300px;
+    height:250px;
 }
 #item-label {
     background-color: rgb(102, 102, 247);
