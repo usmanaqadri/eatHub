@@ -19,11 +19,13 @@
         const addToCart = () => {
             document.querySelector("#return-btn").classList.toggle("selected")
             if (checkboxEl.checked) {
+                document.getElementById("item-label").style.backgroundColor = "rgb(254, 120, 120)"
                 checkboxEl.nextElementSibling.textContent = "Deselect"
-                document.querySelector("button").innerHTML = "Adding to cart <br> Confirm ✓"
+                document.querySelector("#return-btn").innerHTML = "Adding to cart <br> Confirm ✓"
             } else {
+                document.getElementById("item-label").style.backgroundColor = "rgb(102, 102, 247)"
                 checkboxEl.nextElementSibling.textContent = "Add to Cart?"
-                document.querySelector("button").textContent = "Return to menu "
+                document.querySelector("#return-btn").textContent = "Return to menu "
             }
         }
     </script>

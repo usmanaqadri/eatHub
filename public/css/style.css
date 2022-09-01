@@ -293,9 +293,10 @@ input[type=checkbox]:checked + label {
 
 #return-btn {
     width: 150px;
+    height: 60px;
 }
 
 #item-desc {
-    width: 40vw;
+    width: 50vw;
     line-height: 1.6;
 }

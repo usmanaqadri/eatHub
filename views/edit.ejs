@@ -2,8 +2,8 @@
     <main>
         <h2><%= item.name %></h2>
         <form method="POST" action="/eatHub?_method=PUT">
-            <input name="<%= item.id %>" type="number" value="<%= item.qty %>" min="0" />
-            <button>Update Quantity</button>
+            <input style="padding: 20px; font-size: 20px; width: 50px;" name="<%= item.id %>" type="number" value="<%= item.qty %>" min="1" />
+            <button style="padding: 20px;">Update Quantity</button>
         </form>
     </main>
 <%- include('./partials/footer.ejs') %>
