@@ -1,5 +1,5 @@
 # EatHub
-[EatHub](https://eathub-fun-fest.herokuapp.com/eatHub)
+Live link: [EatHub](https://eathub-fun-fest.herokuapp.com/eatHub)
 
 ## Project Description
 This is a web-app for a dummy restuarant that displays its menu and allows users to Create a cart, Reading from a collection of menu items that they may add to their cart and afterwards Update if they want to change the quantity or Delete either individual items or their entire cart and start from scratch.
